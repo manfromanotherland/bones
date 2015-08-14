@@ -1,0 +1,36 @@
+//
+// Base: Helper Classes
+// ----------------------------------------------------------------------------
+
+
+// Clearfix
+// ----------------------------------------------
+
+.clearfix:before,
+.clearfix:after {
+	content: "";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+
+// Image replacement
+// ----------------------------------------------
+
+.ir {
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
+}
+
+
+// Hide elements
+// ----------------------------------------------
+
+.hidden {
+	display: none;
+	visibility: hidden;
+}
