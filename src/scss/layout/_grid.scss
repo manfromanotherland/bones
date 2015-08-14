@@ -28,7 +28,7 @@
 
 	// Gutter
 
-	if variable-exists($gutter) {
+	@if global-variable-exists(gutter) {
 		padding: 0 ($gutter / 2);
 	}
 
