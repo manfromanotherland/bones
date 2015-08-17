@@ -9,7 +9,8 @@
 	@include clearfix();
 	position: relative;
 	width: 100%;
-	max-width: 1200px;
+	max-width: $maxWidth;
+	padding: 0 $gutter/2;
 	margin: 0 auto;
 }
 
