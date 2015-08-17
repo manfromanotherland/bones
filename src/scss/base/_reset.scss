@@ -7,8 +7,8 @@ html {
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
 	box-sizing: inherit;
 }
 
@@ -45,4 +45,10 @@ textarea {
 
 textarea {
 	resize: vertical;
+}
+
+// Remove default margins from figure
+
+figure {
+	margin: 0;
 }
