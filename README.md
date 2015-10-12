@@ -1,3 +1,7 @@
-# SASS Grunt Boilerplate
+# Bones
 
-This is the SASS Boilerplate that I use in most of my projects. It's based on [Evernote SASS Structure Boilerplate](https://github.com/evernote/sass-build-structure) and consequently on [SMACSS](https://smacss.com/).
+Bare-bones front-end boilerplate using Gulp, sass and Browsersync.
+
+## Why Bones?
+
+Because I fancy Star Trek.
