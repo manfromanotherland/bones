@@ -1,22 +1,20 @@
 {
-  "name": "boilerplate",
+  "name": "bones",
   "version": "0.1.0",
-  "author": "Edmundo Santos",
   "repository": {
     "type": "git",
-    "url": "https://github.com/edmundojr/sass-boilerplate",
+    "url": "git+https://github.com/edmundojr/bones.git"
   },
+  "author": "Edmundo Santos",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/edmundojr/sass-boilerplate/issues",
+    "url": "https://github.com/edmundojr/bones/issues"
   },
+  "homepage": "https://github.com/edmundojr/bones#readme",
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "autoprefixer-core": "^5.2.0",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-postcss": "^0.4.0",
-    "grunt-sass": "^1.0.0",
-    "load-grunt-tasks": "^3.2.0",
-  },
-  "license": "MIT"
+    "browser-sync": "^2.9.11",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.0.2",
+    "gulp-sass": "^2.0.4"
+  }
 }
