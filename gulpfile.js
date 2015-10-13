@@ -11,13 +11,13 @@ gulp.task('serve', ['styles'], function() {
 		server: './'
 	});
 
-	gulp.watch('src/scss/*.scss', ['styles']);
+	gulp.watch('src/scss/**/*.scss', ['styles']);
 	gulp.watch('*.html').on('change', browserSync.reload);
 });
 
 // Compile sass into CSS
 gulp.task('styles', function() {
-	return gulp.src('src/scss/*.scss')
+	return gulp.src('src/scss/**/*.scss')
 		.pipe(sass({outputStyle: 'compressed'}))
 		.pipe(autoprefixer('last 2 versions'))
 		.pipe(gulp.dest('dist/css/'))
