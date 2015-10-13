@@ -19,7 +19,7 @@ gulp.task('serve', ['styles'], function() {
 gulp.task('styles', function() {
 	return gulp.src('src/scss/**/*.scss')
 		.pipe(sass({outputStyle: 'compressed'}))
-		.pipe(autoprefixer('last 2 versions'))
+		.pipe(autoprefixer('last 2 versions', '> 2%'))
 		.pipe(gulp.dest('dist/css/'))
 		.pipe(browserSync.stream());
 });
