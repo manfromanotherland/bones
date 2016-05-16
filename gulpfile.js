@@ -13,15 +13,15 @@ var browserSync  = require('browser-sync');
 //  Options
 // -------------------------------------
 
-var options = {
+var paths = {
 
 	html: {
-		files       : '*.html'
+		src  : '*.html'
 	},
 
-	sass: {
-		files	    : 'src/scss/**/*.scss',
-		destination : 'dist/css'
+	styles: {
+		src	 : 'src/scss/**/*.scss',
+		dest : 'dist/css'
 	}
 };
 
@@ -34,8 +34,8 @@ gulp.task('serve', ['styles'], function() {
 		server: './'
 	});
 
-	gulp.watch(options.sass.files, ['styles']);
-	gulp.watch(options.html.files).on('change', browserSync.reload);
+	gulp.watch(paths.styles.src, ['styles']);
+	gulp.watch(paths.html.src).on('change', browserSync.reload);
 });
 
 // -------------------------------------
@@ -43,10 +43,10 @@ gulp.task('serve', ['styles'], function() {
 // -------------------------------------
 
 gulp.task('styles', function() {
-	return gulp.src(options.sass.files)
+	return gulp.src(paths.styles.src)
 		.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
 		.pipe(autoprefixer('last 3 versions'))
-		.pipe(gulp.dest(options.sass.destination))
+		.pipe(gulp.dest(paths.styles.dest))
 		.pipe(browserSync.stream());
 });
 
