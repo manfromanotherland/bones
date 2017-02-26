@@ -2,88 +2,90 @@
 
 Bare-bones front-end boilerplate using npm scripts.
 
-## List of available tasks
+## Features
 
-### `clean`
-`rm -f dist/{css/*,js/*,images/*}`
+* Sass for stylesheets
+* ES6 for JavaScript
+* [Webpack](https://webpack.github.io/) for compiling assets, optimizing images, and concatenating and minifying files
+* [Browsersync](http://www.browsersync.io/) for synchronized browser testing
+* CSS framework: [Bootstrap 4](http://getbootstrap.com/)
 
-Delete existing dist files
+## Requirements
 
-### `autoprefixer`
-`postcss -u autoprefixer -r dist/css/*`
+Make sure all dependencies have been installed before moving on:
 
-Add vendor prefixes to your CSS automatically
+* [Node.js](http://nodejs.org/) >= 6.9.x
+* [Yarn](https://yarnpkg.com/en/docs/install)
 
-### `scss`
-`node-sass --output-style compressed -o dist/css src/scss`
+## Folder Structure
 
-Compile Scss to CSS
+```shell
+├── assets                # → Front-end assets
+│   ├── config.json       # → Settings for compiled assets
+│   ├── build/            # → Webpack and ESLint config
+│   ├── fonts/            # → Theme fonts
+│   ├── images/           # → Theme images
+│   ├── scripts/          # → Theme JS
+│   └── styles/           # → Theme stylesheets
+├── dist/                 # → Built theme assets (never edit)
+├── index.html            # → Never manually edit
+├── node_modules/         # → Node.js packages (never edit)
+├── package.json          # → Node.js dependencies and scripts
+├── templates/            # → Theme templates
+│   ├── layouts/          # → Base templates
+│   └── partials/         # → Partial templates
+```
 
-### `lint`
-`eslint src/js`
+## Development
 
-"Lint" your JavaScript to enforce a uniform style and find errors
+Sage uses [Webpack](https://webpack.github.io/) as a build tool and [npm](https://www.npmjs.com/) to manage front-end packages.
 
-### `uglify`
-`mkdir -p dist/js && uglifyjs src/js/*.js -m -o dist/js/app.js && uglifyjs src/js/*.js -m -c -o dist/js/app.min.js`
+### Install dependencies
 
-Uglify (minify) a production ready bundle of JavaScript
+From the command line on your host machine (not on your Vagrant development box), navigate to the theme directory then run `yarn`:
 
-### `imagemin`
-`imagemin src/img dist/img -p`
+```shell
+# @ bones/
+$ yarn
+```
 
-Compress all types of images
+You now have all the necessary dependencies to run the build process.
 
-### `icons`
-`svgo -f src/img/icons && mkdir -p dist/img && svg-sprite-generate -d src/img/icons -o dist/img/icons.svg`
+### Build commands
 
-Compress separate SVG files and combine them into one SVG "sprite"
+* `yarn run start` — Compile assets when file changes are made, start Browsersync session
+* `yarn run build` — Compile and optimize the files in your assets directory
+* `yarn run build:production` — Compile assets for production
 
-### `serve`
-`browser-sync start --server --files 'dist/css/*.css, dist/js/*.js, **/*.html, !node_modules/**/*.html'`
+#### Additional commands
 
-Start a new server and watch for CSS & JS file changes in the `dist` folder
+* `yarn run rmdist` — Remove your `dist/` folder
+* `yarn run lint` — Run ESLint against your assets and build scripts
 
-### `build:css`
-`npm run scss && npm run autoprefixer`
+### Using Browsersync
 
-Alias to run the `scss` and `autoprefixer` tasks. Compiles Scss to CSS & add vendor prefixes
+To use Browsersync you need to update `devUrl` at the bottom of `assets/config.json` to reflect your local development hostname.
 
-### `build:js`
-`npm run lint && npm run concat && npm run uglify`
+If your local development URL is `https://project-name.dev`, update the file to read:
+```json
+...
+  "devUrl": "https://project-name.dev",
+...
+```
 
-Alias to run the `lint`, `concat` and `uglify` tasks. Lints JS, combines `src` JS files & uglifies the output
+By default, Browsersync will use webpack's [HMR](https://webpack.github.io/docs/hot-module-replacement.html), which won't trigger a page reload in your browser.
 
-### `build:images`
-`npm run imagemin && npm run icons`
+If you would like to force Browsersync to reload the page whenever certain file types are edited, then add them to `watch` in `assets/config.json`.
 
-Alias to run the `imagemin` and `icons` tasks. Compresses images, generates an SVG sprite from a folder of separate SVGs
+```json
+...
+  "watch": [
+    "assets/scripts/**/*.js",
+    "templates/**/*.php"
+  ],
+...
+```
 
-### `build:all`
-`npm run build:css && npm run build:js && npm run build:images`
+# Credit
 
-Alias to run all of the `build` commands
-
-### `watch:css`
-`onchange 'src/**/*.scss' -- npm run build:css`
-
-Watches for any .scss file in `src` to change, then runs the `build:css` task
-
-### `watch:js`
-`onchange 'src/**/*.js' -- npm run build:js`
-
-Watches for any .js file in `src` to change, then runs the `build:js` task
-
-### `watch:all`
-`npm-run-all -p serve watch:css watch:js`
-
-Run the following tasks simultaneously: `serve`, `watch:css` & `watch:js`. When a .scss or .js file changes in `src`, the task will compile the changes to `dist`, and the server will be notified of the change. Any browser connected to the server will then inject the new file from `dist`
-
-### `postinstall`
-`npm run build:all && npm run watch:all`
-
-Runs `watch:all` after `npm install` is finished
-
-## Credit
-
-The npm script is heavily based on a repository by [Damon Bauer](https://github.com/damonbauer). I made some small changes that better suit my needs, that's all. You should definitely check the [original repository](https://github.com/damonbauer/npm-build-boilerplate).
+When working on a Wordpress project I learned about [Sage](https://roots.io/sage/), so I thought of bringing they modern WordPress develop stack to use without WordPress. All credit to the guys at Roots – see License.
